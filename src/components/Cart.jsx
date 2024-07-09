@@ -25,13 +25,22 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
 
     try {
       const restaurantId = localStorage.getItem('restaurantId');
+      const token = localStorage.getItem('token');
+
       if (!restaurantId) {
         throw new Error('Restaurant ID is not set');
+      }
+      if (!token) {
+        throw new Error('Token is not set');
       }
 
       const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
 
-      const response = await axios.post(`${customerBackendApiUrl}/restaurants/${restaurantId}/orders`, orderDetails);
+      const response = await axios.post(
+        `${customerBackendApiUrl}/restaurants/${restaurantId}/orders`,
+        orderDetails,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       console.log('Order placed successfully:', response.data);
     } catch (error) {
