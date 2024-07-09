@@ -10,26 +10,37 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
     setShowCart(false);
   };
 
-  const handlePlaceOrder = async (orderDetails) => {
+  const handlePlaceOrder = async () => {
+    const orderDetails = {
+      name,
+      whatsapp,
+      items: cartItems.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      totalPrice: getTotalPrice(),
+    };
+
     try {
       const restaurantId = localStorage.getItem('restaurantId');
       if (!restaurantId) {
         throw new Error('Restaurant ID is not set');
       }
-  
+
       const backendApiUrl = import.meta.env.VITE_APP_BASE_BACKEND_API;
       const token = localStorage.getItem('token');
-  
+
       const response = await axios.post(`${backendApiUrl}/restaurants/${restaurantId}/orders`, orderDetails, {
         headers: { Authorization: `Bearer ${token}` }
       });
-  
+
       console.log('Order placed successfully:', response.data);
     } catch (error) {
       console.error('Error saving order:', error);
     }
   };
-  
 
   const getTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);

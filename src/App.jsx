@@ -83,26 +83,6 @@ const App = () => {
     });
   };
 
-  const handlePlaceOrder = async (orderDetails) => {
-    try {
-      const restaurantId = localStorage.getItem('restaurantId');
-      if (!restaurantId) {
-        throw new Error('Restaurant ID is not set');
-      }
-
-      const backendApiUrl = import.meta.env.VITE_APP_BASE_BACKEND_API;
-      const token = localStorage.getItem('token');
-
-      const response = await axios.post(`${backendApiUrl}/restaurants/${restaurantId}/orders`, orderDetails, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      console.log('Order placed successfully:', response.data);
-    } catch (error) {
-      console.error('Error saving order:', error);
-    }
-  };
-
   if (!isLoggedIn) {
     return <div>Loading...</div>;
   }
@@ -128,8 +108,6 @@ const App = () => {
         <Cart
           cartItems={cart}
           setShowCart={setShowCart}
-          removeItem={removeItem}
-          updateItemCount={updateItemCount}
           setShowPlaceOrderPage={setShowPlaceOrderPage}
         />
       )}
