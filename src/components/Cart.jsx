@@ -21,16 +21,16 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
         quantity: item.quantity,
       })),
       totalPrice: getTotalPrice(),
+      restaurantId: localStorage.getItem('restaurantId'), // Add restaurantId to request body
     };
 
     try {
-      const restaurantId = localStorage.getItem('restaurantId');
       const token = localStorage.getItem('token');
 
-      console.log('Restaurant ID:', restaurantId); // Log restaurant ID
+      console.log('Restaurant ID:', orderDetails.restaurantId); // Log restaurant ID
       console.log('Token:', token); // Log token
 
-      if (!restaurantId) {
+      if (!orderDetails.restaurantId) {
         throw new Error('Restaurant ID is not set');
       }
       if (!token) {
@@ -40,7 +40,7 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
       
       // Log the constructed URL for debugging
-      const endpoint = `${customerBackendApiUrl}/restaurants/${restaurantId}/orders`;
+      const endpoint = `${customerBackendApiUrl}/orders`;
       console.log('POST endpoint:', endpoint);
 
       const response = await axios.post(
