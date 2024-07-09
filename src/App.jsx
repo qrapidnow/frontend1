@@ -35,6 +35,7 @@ const App = () => {
             console.log('Restaurant response:', restaurantResponse); // Log restaurant response
             if (restaurantResponse && restaurantResponse._id) {
               localStorage.setItem('restaurantId', restaurantResponse._id);
+              console.log('Set restaurantId in localStorage:', restaurantResponse._id); // Log setting of restaurantId
             }
           }
         } else {

@@ -27,6 +27,9 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       const restaurantId = localStorage.getItem('restaurantId');
       const token = localStorage.getItem('token');
 
+      console.log('Restaurant ID:', restaurantId); // Log restaurant ID
+      console.log('Token:', token); // Log token
+
       if (!restaurantId) {
         throw new Error('Restaurant ID is not set');
       }
