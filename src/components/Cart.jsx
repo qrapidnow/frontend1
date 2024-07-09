@@ -28,7 +28,11 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
 
     try {
       const backendUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
-      const response = await axios.post(`${backendUrl}/orders`, orderData);
+      const restaurantId = localStorage.getItem('restaurantId'); // Retrieve the restaurantId
+      if (!restaurantId) {
+        throw new Error('Restaurant ID not found');
+      }
+      const response = await axios.post(`${backendUrl}/restaurants/${restaurantId}/orders`, orderData);
       console.log('Order saved:', response.data);
       alert('Order saved successfully!');
       handleCloseCart();
