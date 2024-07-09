@@ -4,13 +4,14 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Navbar from './components/NavBar';
 import Menu from './components/Menu';
-import CartItem from './components/CartItem';
+import Cart from './components/Cart';
+import PlaceOrderPage from './components/PlaceOrderPage';
 import axios from 'axios';
 
 const App = () => {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
-  const [showCartItem, setShowCartItem] = useState(false);
+  const [showPlaceOrderPage, setShowPlaceOrderPage] = useState(false);
   const [foodItemCounts, setFoodItemCounts] = useState({});
   const [restaurantName, setRestaurantName] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,18 +23,18 @@ const App = () => {
     const fetchUsersAndToken = async () => {
       try {
         const usersResponse = await axios.get(`${backendApiUrl}/users`);
-        console.log('Users Response:', usersResponse.data); // Log users response data
+        console.log('Users Response:', usersResponse.data);
         const users = usersResponse.data;
         if (users && users.length > 0) {
           const firstUserId = users[0]._id;
-          console.log('First User ID:', firstUserId); // Log first user ID
+          console.log('First User ID:', firstUserId);
           const tokenResponse = await axios.get(`${backendApiUrl}/token/${firstUserId}`);
-          console.log('Token Response:', tokenResponse.data); // Log token response data
+          console.log('Token Response:', tokenResponse.data);
           const token = tokenResponse.data.token;
           if (token) {
             localStorage.setItem('token', token);
             const restaurantResponse = await fetchRestaurant(token);
-            console.log('Restaurant Response:', restaurantResponse); // Log restaurant response data
+            console.log('Restaurant Response:', restaurantResponse);
             localStorage.setItem('restaurantId', restaurantResponse._id);
           }
         } else {
@@ -67,12 +68,11 @@ const App = () => {
 
   const getTotalItems = () => cart.length;
 
-  const handleViewOrderClick = () => setShowCartItem(true);
+  const handleViewOrderClick = () => setShowPlaceOrderPage(true);
   const handleCartClick = () => {
     setShowCart(true);
-    setShowCartItem(true);
+    setShowPlaceOrderPage(false);
   };
-  const handleCartItemToggle = () => setShowCartItem((prev) => !prev);
 
   const removeItem = (itemToRemove) => {
     setCart((prevCart) => prevCart.filter((item) => item !== itemToRemove));
@@ -107,16 +107,17 @@ const App = () => {
           <span className="order-count">{getTotalItems()}</span>
         </div>
       )}
-      {showCartItem && (
-        <div className="cart-item-container">
-          <CartItem
-            cartItems={cart}
-            setCart={setCart}
-            removeItem={removeItem}
-            setShowCartItem={setShowCartItem}
-            updateItemCount={updateItemCount}
-          />
-        </div>
+      {showCart && (
+        <Cart
+          cartItems={cart}
+          setShowCart={setShowCart}
+          removeItem={removeItem}
+          updateItemCount={updateItemCount}
+          setShowPlaceOrderPage={setShowPlaceOrderPage}
+        />
+      )}
+      {showPlaceOrderPage && (
+        <PlaceOrderPage cartItems={cart} />
       )}
     </div>
   );
