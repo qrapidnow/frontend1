@@ -38,9 +38,13 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       }
 
       const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
+      
+      // Log the constructed URL for debugging
+      const endpoint = `${customerBackendApiUrl}/restaurants/${restaurantId}/orders`;
+      console.log('POST endpoint:', endpoint);
 
       const response = await axios.post(
-        `${customerBackendApiUrl}/restaurants/${restaurantId}/orders`,
+        endpoint,
         orderDetails,
         { headers: { Authorization: `Bearer ${token}` } }
       );
