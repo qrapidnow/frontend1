@@ -18,7 +18,7 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const customerBackendApiUrl = 'https://customerbackend.vercel.app';  // Updated for clarity
+      const customerBackendApiUrl = 'https://customerbackend.vercel.app/api';  // Ensure this URL is correct
       const response = await axios.post(`${customerBackendApiUrl}/orders`, orderDetails, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -43,7 +43,7 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
         <label htmlFor="whatsapp">WhatsApp:</label>
         <input type="text" id="whatsapp" value={whatsapp} onChange={e => setWhatsapp(e.target.value)} required />
         <button onClick={handlePlaceOrder}>Place Order</button>
-        {orderStatus && <p>{orderStatus}</p>}  // Display order status message
+        {orderStatus && <p>{orderStatus}</p>}
       </div>
     </div>
   );
