@@ -112,7 +112,7 @@ const App = () => {
         />
       )}
       {showPlaceOrderPage && (
-        <PlaceOrderPage cartItems={cart} onPlaceOrder={handlePlaceOrder} />
+        <PlaceOrderPage cartItems={cart} />
       )}
     </div>
   );
