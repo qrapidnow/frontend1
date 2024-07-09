@@ -19,7 +19,7 @@ const App = () => {
   useEffect(() => {
     const backendApiUrl = import.meta.env.VITE_APP_BASE_BACKEND_API;
     console.log('Backend API URL:', backendApiUrl);
-  
+
     const fetchUsersAndToken = async () => {
       try {
         const usersResponse = await axios.get(`${backendApiUrl}/users`);
@@ -35,7 +35,7 @@ const App = () => {
             localStorage.setItem('token', token);
             const restaurantResponse = await fetchRestaurant(token);
             console.log('Restaurant Response:', restaurantResponse);
-            localStorage.setItem('restaurantId', restaurantResponse._id);
+            localStorage.setItem('restaurantId', restaurantResponse._id); // Ensure this is set correctly
           }
         } else {
           console.error('No users found');
@@ -44,9 +44,10 @@ const App = () => {
         console.error('Error fetching users or token:', error);
       }
     };
-  
+
     fetchUsersAndToken();
-  }, []);  
+  }, []);
+
   const fetchRestaurant = async (token) => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_APP_BASE_BACKEND_API}/restaurants`, {
