@@ -1,3 +1,4 @@
+// Cart.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Cart.css';
@@ -21,37 +22,24 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
         quantity: item.quantity,
       })),
       totalPrice: getTotalPrice(),
-      restaurantId: localStorage.getItem('restaurantId'), // Add restaurantId to request body
+      restaurantId: localStorage.getItem('restaurantId'),
     };
 
     try {
       const token = localStorage.getItem('token');
-
-      console.log('Restaurant ID:', orderDetails.restaurantId); // Log restaurant ID
-      console.log('Token:', token); // Log token
-
-      if (!orderDetails.restaurantId) {
-        throw new Error('Restaurant ID is not set');
-      }
-      if (!token) {
-        throw new Error('Token is not set');
-      }
-
       const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
-      
-      // Log the constructed URL for debugging
       const endpoint = `${customerBackendApiUrl}/orders`;
-      console.log('POST endpoint:', endpoint);
 
-      const response = await axios.post(
-        endpoint,
-        orderDetails,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      console.log('Endpoint URL:', endpoint);  // Confirm the constructed endpoint URL
+
+      const response = await axios.post(endpoint, orderDetails, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
       console.log('Order placed successfully:', response.data);
+      setShowPlaceOrderPage(true);  // Navigate to the order placed page on success
     } catch (error) {
-      console.error('Error saving order:', error);
+      console.error('Error placing order:', error);
     }
   };
 
