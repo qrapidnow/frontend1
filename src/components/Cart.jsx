@@ -18,10 +18,8 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API || 'https://customerbackend.vercel.app';
-      const endpoint = `${customerBackendApiUrl}/orders`;
-
-      const response = await axios.post(endpoint, orderDetails, {
+      const customerBackendApiUrl = 'https://customerbackend.vercel.app/api';  // Updated for clarity
+      const response = await axios.post(`${customerBackendApiUrl}/orders`, orderDetails, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -41,21 +39,9 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       </div>
       <div className="cart-details">
         <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} required />
         <label htmlFor="whatsapp">WhatsApp:</label>
-        <input
-          type="text"
-          id="whatsapp"
-          value={whatsapp}
-          onChange={(e) => setWhatsapp(e.target.value)}
-          required
-        />
+        <input type="text" id="whatsapp" value={whatsapp} onChange={e => setWhatsapp(e.target.value)} required />
         <button onClick={handlePlaceOrder}>Place Order</button>
         {orderStatus && <p>{orderStatus}</p>}  // Display order status message
       </div>
