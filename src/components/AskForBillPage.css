@@ -1,0 +1,142 @@
+
+  /* Ask For Bill Page */
+  .ask-for-bill-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto;
+  }
+
+.ask-for-bill-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.ask-for-bill-button {
+  background-color: #00BF63;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ask-for-bill-button:hover {
+  background-color: #009e52;
+}
+
+  .ask-for-bill {
+    width: 90%;
+    max-width: 600px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ask-for-bill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .ask-for-bill-header h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .ask-for-bill-header .back-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #00BF63;
+  }
+  
+  .rating-section,
+  .feedback-section,
+  .order-details {
+    margin-bottom: 20px;
+  }
+  
+  .rating-section label,
+  .feedback-section label,
+  .order-details h3 {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  .stars {
+    display: flex;
+  }
+  
+  .star {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+  }
+  
+  .star.filled {
+    color: #FFD700;
+  }
+  
+  .feedback-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  .order-item {
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .order-total {
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  .ask-for-bill-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .action-button {
+    padding: 10px 15px;
+    background-color: #00BF63;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .action-button:hover {
+    background-color: #008c4a;
+    transform: translateY(-2px);
+  }
+  .back-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #00BF63;
+  }
+  

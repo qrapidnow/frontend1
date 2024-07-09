@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Kameron', serif;
+  background-color: #fff;  /* Change background to black */
+  color: #fff;             /* Change text color to white */
+}
+
+* {
+  box-sizing: border-box;
+}
+

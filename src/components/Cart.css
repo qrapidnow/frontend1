@@ -1,0 +1,87 @@
+.cart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .cart-header h2 {
+    margin: 0;
+  }
+  
+  .cart-header button {
+    background: #00BF63;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .cart-items {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow-y: auto;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+  }
+  
+  .cart-total {
+    margin: 20px 0;
+  }
+  /* src/components/Navbar.css */
+/* src/components/Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 15px;
+    position: relative; /* Added to position the cart icon */
+  }
+  
+  .navbar button {
+    border: none;
+    background: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white; /* Set text color to white */
+  }
+  
+  .cart-icon {
+    position: absolute;
+    right: 20px; /* Adjust as necessary */
+    top: 50%; /* Adjust as necessary */
+    transform: translateY(-50%); /* Center vertically */
+    background-color: #00BF63; /* Green background for the cart icon */
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
