@@ -10,38 +10,26 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
     setShowCart(false);
   };
 
-  const handlePlaceOrder = async () => {
-    if (name.trim() === '' || whatsapp.trim() === '') {
-      alert('Please enter your name and WhatsApp number.');
-      return;
-    }
-
-    const orderData = {
-      name,
-      whatsapp,
-      cartItems: cartItems.map(item => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      }))
-    };
-
+  const handlePlaceOrder = async (orderDetails) => {
     try {
-      const backendUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
-      const restaurantId = localStorage.getItem('restaurantId'); // Retrieve the restaurantId
+      const restaurantId = localStorage.getItem('restaurantId');
       if (!restaurantId) {
-        throw new Error('Restaurant ID not found');
+        throw new Error('Restaurant ID is not set');
       }
-      const response = await axios.post(`${backendUrl}/restaurants/${restaurantId}/orders`, orderData);
-      console.log('Order saved:', response.data);
-      alert('Order saved successfully!');
-      handleCloseCart();
-      setShowPlaceOrderPage(true);
+  
+      const backendApiUrl = import.meta.env.VITE_APP_BASE_BACKEND_API;
+      const token = localStorage.getItem('token');
+  
+      const response = await axios.post(`${backendApiUrl}/restaurants/${restaurantId}/orders`, orderDetails, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      console.log('Order placed successfully:', response.data);
     } catch (error) {
       console.error('Error saving order:', error);
-      alert('Error saving order');
     }
   };
+  
 
   const getTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);

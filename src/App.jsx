@@ -18,24 +18,21 @@ const App = () => {
 
   useEffect(() => {
     const backendApiUrl = import.meta.env.VITE_APP_BASE_BACKEND_API;
-    console.log('Backend API URL:', backendApiUrl);
 
     const fetchUsersAndToken = async () => {
       try {
         const usersResponse = await axios.get(`${backendApiUrl}/users`);
-        console.log('Users Response:', usersResponse.data);
         const users = usersResponse.data;
         if (users && users.length > 0) {
           const firstUserId = users[0]._id;
-          console.log('First User ID:', firstUserId);
           const tokenResponse = await axios.get(`${backendApiUrl}/token/${firstUserId}`);
-          console.log('Token Response:', tokenResponse.data);
           const token = tokenResponse.data.token;
           if (token) {
             localStorage.setItem('token', token);
             const restaurantResponse = await fetchRestaurant(token);
-            console.log('Restaurant Response:', restaurantResponse);
-            localStorage.setItem('restaurantId', restaurantResponse._id); // Ensure this is set correctly
+            if (restaurantResponse && restaurantResponse._id) {
+              localStorage.setItem('restaurantId', restaurantResponse._id);
+            }
           }
         } else {
           console.error('No users found');
@@ -86,6 +83,26 @@ const App = () => {
     });
   };
 
+  const handlePlaceOrder = async (orderDetails) => {
+    try {
+      const restaurantId = localStorage.getItem('restaurantId');
+      if (!restaurantId) {
+        throw new Error('Restaurant ID is not set');
+      }
+
+      const backendApiUrl = import.meta.env.VITE_APP_BASE_BACKEND_API;
+      const token = localStorage.getItem('token');
+
+      const response = await axios.post(`${backendApiUrl}/restaurants/${restaurantId}/orders`, orderDetails, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      console.log('Order placed successfully:', response.data);
+    } catch (error) {
+      console.error('Error saving order:', error);
+    }
+  };
+
   if (!isLoggedIn) {
     return <div>Loading...</div>;
   }
@@ -117,7 +134,7 @@ const App = () => {
         />
       )}
       {showPlaceOrderPage && (
-        <PlaceOrderPage cartItems={cart} />
+        <PlaceOrderPage cartItems={cart} onPlaceOrder={handlePlaceOrder} />
       )}
     </div>
   );
