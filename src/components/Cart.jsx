@@ -27,10 +27,8 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       const restaurantId = localStorage.getItem('restaurantId');
       const token = localStorage.getItem('token');
 
-      // Logging to check all values
-      console.log('Restaurant ID:', restaurantId);
-      console.log('Token:', token);
-      console.log('Order Details:', orderDetails);
+      console.log('Restaurant ID:', restaurantId); // Log restaurant ID
+      console.log('Token:', token); // Log token
 
       if (!restaurantId) {
         throw new Error('Restaurant ID is not set');
@@ -42,16 +40,14 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
 
       const response = await axios.post(
-        `${customerBackendApiUrl}/restaurants/${restaurantId}/orders`,
+        ${customerBackendApiUrl}/restaurants/${restaurantId}/orders,
         orderDetails,
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: Bearer ${token} } }
       );
 
       console.log('Order placed successfully:', response.data);
-      alert('Order placed successfully!');
     } catch (error) {
       console.error('Error saving order:', error);
-      alert('Error saving order. Please try again.');
     }
   };
 
