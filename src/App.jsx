@@ -22,20 +22,20 @@ const App = () => {
     const fetchUsersAndToken = async () => {
       try {
         const usersResponse = await axios.get(`${backendApiUrl}/users`);
-        console.log('Users response:', usersResponse.data); // Log user response
+        console.log('Users response:', usersResponse.data);
         const users = usersResponse.data;
         if (users && users.length > 0) {
           const firstUserId = users[0]._id;
           const tokenResponse = await axios.get(`${backendApiUrl}/token/${firstUserId}`);
-          console.log('Token response:', tokenResponse.data); // Log token response
+          console.log('Token response:', tokenResponse.data);
           const token = tokenResponse.data.token;
           if (token) {
             localStorage.setItem('token', token);
             const restaurantResponse = await fetchRestaurant(token);
-            console.log('Restaurant response:', restaurantResponse); // Log restaurant response
+            console.log('Restaurant response:', restaurantResponse);
             if (restaurantResponse && restaurantResponse._id) {
               localStorage.setItem('restaurantId', restaurantResponse._id);
-              console.log('Set restaurantId in localStorage:', restaurantResponse._id); // Log setting of restaurantId
+              console.log('Set restaurantId in localStorage:', restaurantResponse._id);
             }
           }
         } else {
@@ -54,7 +54,7 @@ const App = () => {
       const response = await axios.get(`${import.meta.env.VITE_APP_BASE_BACKEND_API}/restaurants`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log('Fetched restaurant data:', response.data); // Log fetched restaurant data
+      console.log('Fetched restaurant data:', response.data);
       setRestaurantName(response.data.name);
       setIsLoggedIn(true);
       return response.data;

@@ -27,8 +27,10 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       const restaurantId = localStorage.getItem('restaurantId');
       const token = localStorage.getItem('token');
 
-      console.log('Restaurant ID:', restaurantId); // Log restaurant ID
-      console.log('Token:', token); // Log token
+      // Logging to check all values
+      console.log('Restaurant ID:', restaurantId);
+      console.log('Token:', token);
+      console.log('Order Details:', orderDetails);
 
       if (!restaurantId) {
         throw new Error('Restaurant ID is not set');
@@ -46,8 +48,10 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
       );
 
       console.log('Order placed successfully:', response.data);
+      alert('Order placed successfully!');
     } catch (error) {
       console.error('Error saving order:', error);
+      alert('Error saving order. Please try again.');
     }
   };
 
