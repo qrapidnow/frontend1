@@ -18,7 +18,7 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const customerBackendApiUrl = 'https://customerbackend.vercel.app/api';  // Ensure this URL is correct
+      const customerBackendApiUrl = 'https://customerbackend.vercel.app';  // Ensure this URL is correct
       const response = await axios.post(`${customerBackendApiUrl}/orders`, orderDetails, {
         headers: { Authorization: `Bearer ${token}` }
       });
