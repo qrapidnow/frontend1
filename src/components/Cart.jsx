@@ -6,6 +6,7 @@ import './Cart.css';
 const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
   const [name, setName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [orderStatus, setOrderStatus] = useState('');
 
   const handleCloseCart = () => {
     setShowCart(false);
@@ -27,19 +28,18 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API;
+      const customerBackendApiUrl = import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API || 'https://customerbackend.vercel.app';  // Fallback URL if environment variable fails
       const endpoint = `${customerBackendApiUrl}/orders`;
-
-      console.log('Endpoint URL:', endpoint);  // Confirm the constructed endpoint URL
 
       const response = await axios.post(endpoint, orderDetails, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      console.log('Order placed successfully:', response.data);
+      setOrderStatus('Your order has been placed!');
       setShowPlaceOrderPage(true);  // Navigate to the order placed page on success
     } catch (error) {
       console.error('Error placing order:', error);
+      setOrderStatus('Failed to place order.');
     }
   };
 
@@ -82,6 +82,7 @@ const Cart = ({ cartItems, setShowCart, setShowPlaceOrderPage }) => {
           required
         />
         <button onClick={handlePlaceOrder}>Place Order</button>
+        {orderStatus && <p>{orderStatus}</p>}  // Display order status message
       </div>
     </div>
   );
