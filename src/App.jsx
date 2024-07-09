@@ -4,7 +4,6 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Navbar from './components/NavBar';
 import Menu from './components/Menu';
-import Cart from './components/Cart';
 import CartItem from './components/CartItem';
 import axios from 'axios';
 
