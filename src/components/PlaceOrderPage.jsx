@@ -23,7 +23,8 @@ const PlaceOrderPage = ({ cartItems, setShowPlaceOrderPage }) => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API}/orders`,
-        orderData
+        orderData,
+        { headers: { 'Content-Type': 'application/json' } }
       );
       console.log('Order saved:', response.data);
       alert('Order placed successfully!');
