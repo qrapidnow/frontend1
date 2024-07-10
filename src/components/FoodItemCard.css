@@ -67,8 +67,8 @@
     box-shadow: none;
     border-bottom: 1px solid #e0e0e0;
     width: calc(100% - 20px); /* Adjustments for mobile view */
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   .food-item-card.expanded {
