@@ -60,6 +60,9 @@
     background-color: transparent;
     box-shadow: none;
     border-bottom: 1px solid #e0e0e0;
+    width: calc(100% - 20px); /* Full width with left and right gaps */
+    margin-left: 10px; /* Left gap */
+    margin-right: 10px; /* Right gap */
   }
 
   .food-item-card.expanded {
