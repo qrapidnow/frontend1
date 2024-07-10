@@ -18,9 +18,11 @@ const PlaceOrderPage = ({ cartItems, setShowPlaceOrderPage }) => {
       })),
     };
 
-    console.log('Environment Variable:', import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API); // Log the environment variable
+    console.log('Order data to be sent:', orderData);
+    console.log('Environment Variable:', import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API);
 
     try {
+      console.log('Attempting to send order data to backend...');
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API}/orders`,
         orderData,
@@ -31,6 +33,19 @@ const PlaceOrderPage = ({ cartItems, setShowPlaceOrderPage }) => {
       setShowPlaceOrderPage(false); // Close the order page
     } catch (error) {
       console.error('Error saving order:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log('Error data:', error.response.data);
+        console.log('Error status:', error.response.status);
+        console.log('Error headers:', error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log('Error request:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error message:', error.message);
+      }
       alert('Failed to place the order. Please try again.');
     }
   };
