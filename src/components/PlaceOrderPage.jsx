@@ -8,7 +8,7 @@ const PlaceOrderPage = ({ cartItems, setShowPlaceOrderPage }) => {
 
   const handleSubmitOrder = async (event) => {
     event.preventDefault();
-    
+
     const orderData = {
       name,
       whatsapp,
@@ -17,6 +17,8 @@ const PlaceOrderPage = ({ cartItems, setShowPlaceOrderPage }) => {
         price: item.price,
       })),
     };
+
+    console.log('Environment Variable:', import.meta.env.VITE_APP_BASE_CUSTOMER_BACKEND_API); // Log the environment variable
 
     try {
       const response = await axios.post(

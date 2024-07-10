@@ -1,4 +1,3 @@
-// Update the import statement for PlaceOrderPage
 import React, { useState } from 'react';
 import './CartItem.css';
 import PlaceOrderPage from './PlaceOrderPage';
@@ -25,6 +24,7 @@ const CartItem = ({ cartItems, setCart, removeItem, setShowCartItem, updateItemC
   };
 
   const handleAskForBill = () => {
+    // Assuming nameEntered and whatsappEntered are passed to CartItem component
     if (nameEntered && whatsappEntered) {
       setShowAskForBillPage(true);
     } else {
