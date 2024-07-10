@@ -1,3 +1,4 @@
+// Update the import statement for PlaceOrderPage
 import React, { useState } from 'react';
 import './CartItem.css';
 import PlaceOrderPage from './PlaceOrderPage';
@@ -6,27 +7,6 @@ import AskForBillPage from './AskForBillPage';
 const CartItem = ({ cartItems, setCart, removeItem, setShowCartItem, updateItemCount }) => {
   const [showPlaceOrderPage, setShowPlaceOrderPage] = useState(false);
   const [showAskForBillPage, setShowAskForBillPage] = useState(false);
-  const [name, setName] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [nameEntered, setNameEntered] = useState(false);
-  const [whatsappEntered, setWhatsappEntered] = useState(false);
-
-  const handleDelete = (item) => {
-    removeItem(item);
-    updateItemCount(item.id, -item.quantity);
-  };
-
-  const handleQuantityChange = (item, increment) => {
-    const updatedCart = cartItems.map((cartItem) =>
-      cartItem === item
-        ? {
-            ...cartItem,
-            quantity: Math.max(1, cartItem.quantity + increment),
-          }
-        : cartItem
-    );
-    setCart(updatedCart);
-  };
 
   const handleBackToCart = () => {
     setShowCartItem(false);
@@ -44,16 +24,6 @@ const CartItem = ({ cartItems, setCart, removeItem, setShowCartItem, updateItemC
     setShowPlaceOrderPage(true);
   };
 
-  const handlePlaceOrder = () => {
-    if (name.trim() !== '' && whatsapp.trim() !== '') {
-      setNameEntered(true);
-      setWhatsappEntered(true);
-      setShowPlaceOrderPage(false);
-    } else {
-      alert('Please enter your name and WhatsApp number before placing the order.');
-    }
-  };
-
   const handleAskForBill = () => {
     if (nameEntered && whatsappEntered) {
       setShowAskForBillPage(true);
@@ -66,12 +36,8 @@ const CartItem = ({ cartItems, setCart, removeItem, setShowCartItem, updateItemC
     return (
       <div className="cart-item-container">
         <PlaceOrderPage
+          cartItems={cartItems}
           setShowPlaceOrderPage={setShowPlaceOrderPage}
-          name={name}
-          setName={setName}
-          whatsapp={whatsapp}
-          setWhatsapp={setWhatsapp}
-          handlePlaceOrder={handlePlaceOrder}
         />
       </div>
     );
@@ -82,8 +48,6 @@ const CartItem = ({ cartItems, setCart, removeItem, setShowCartItem, updateItemC
       <AskForBillPage
         cartItems={cartItems}
         setShowAskForBillPage={setShowAskForBillPage}
-        nameEntered={nameEntered}
-        whatsappEntered={whatsappEntered}
       />
     );
   }
