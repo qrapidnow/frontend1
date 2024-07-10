@@ -1,24 +1,40 @@
 .navbar {
   width: 100%;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
   padding: 10px 0;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of buttons */
+  background-color: transparent; /* Make the navbar box invisible */
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 0;
   margin: 0;
 }
 
 .navbar li {
-  font-size: 1rem;
-  color: #333;
-  cursor: pointer;
+  margin: 0 10px; /* Add space between buttons */
 }
 
-.navbar li:hover {
+.category-button {
+  border-radius: 20px;
+  border: 1px solid #333;
+  background-color: transparent;
+  color: #333;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.category-button:hover {
   color: #00BF63;
+  border-color: #00BF63;
+}
+
+.category-button.active {
+  background-color: #00BF63;
+  color: #fff;
 }

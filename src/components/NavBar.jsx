@@ -4,6 +4,7 @@ import './NavBar.css';
 
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -30,7 +31,14 @@ const Navbar = () => {
     <nav className="navbar">
       <ul>
         {categories.map((category) => (
-          <li key={category._id}>{category.name}</li>
+          <li key={category._id}>
+            <button
+              className={`category-button ${activeCategory === category._id ? 'active' : ''}`}
+              onClick={() => setActiveCategory(category._id)}
+            >
+              {category.name}
+            </button>
+          </li>
         ))}
       </ul>
     </nav>
