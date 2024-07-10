@@ -4,8 +4,8 @@
   background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   border-radius: 10px;
-  overflow: hidden; /* Ensures no content spills outside the border */
-  margin-bottom: 20px; /* Increased spacing between items */
+  overflow: hidden;
+  margin-bottom: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -13,20 +13,20 @@
 .food-item-summary {
   display: flex;
   align-items: center;
-  padding: 10px; /* Padding around the item summary */
+  padding: 10px;
 }
 
 .food-item-image {
   flex-shrink: 0;
-  width: 90px; /* Adjust width as needed */
-  height: 90px; /* Adjust height as needed */
-  margin-right: 15px; /* Space between image and text */
+  width: 90px;
+  height: 90px;
+  margin-right: 15px;
 }
 
 .food-item-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the area */
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -34,48 +34,49 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center content */
+  justify-content: center;
 }
 
 .food-item-title {
   font-size: 1.2rem;
   color: #333;
   margin: 0;
-  font-weight: bold; /* Make the title bold */
+  font-weight: bold;
 }
 
 .food-item-price {
   font-size: 1rem;
   color: #e94b3c;
   font-weight: bold;
-  margin-top: 5px; /* Space between title and price */
+  margin-top: 5px;
 }
 
 .food-item-expanded-content {
-  display: flex;
-  justify-content: space-between;
   padding: 10px;
-  background-color: #f8f8f8; /* Light background for expanded area */
-  border-top: 1px solid #e0e0e0; /* Separator line */
+  background-color: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
 }
 
 .food-item-description {
   font-size: 0.9rem;
   color: #666;
   margin: 0;
-  flex-grow: 1;
 }
 
 .food-item-weight {
-  margin-left: 10px; /* Space between description and weight */
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px; /* Added space above weight for clear separation */
 }
 
 .add-button {
   padding: 8px 12px;
   background-color: #00BF63;
   color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 10px; /* Space between button and weight */
 }
