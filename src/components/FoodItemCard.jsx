@@ -22,16 +22,16 @@ const FoodItemCard = ({ item, addItem, updateItemCount }) => {
             <img src={item.image} alt={item.name} />
           </div>
         )}
-        <h3 className="food-item-title">{item.name}</h3>
-        <p className="food-item-price">₹{item.price}</p>
+        <div className="food-item-info">
+          <h3 className="food-item-title">{item.name}</h3>
+          <p className="food-item-price">₹{item.price}</p>
+        </div>
       </div>
       {isExpanded && (
-        <div>
+        <div className="food-item-expanded-content">
           <p className="food-item-description">{item.description}</p>
-          <div className="food-item-add">
-            <span>{item.weight} g</span>
-            <button onClick={handleAdd} className="add-button">Add</button>
-          </div>
+          <span className="food-item-weight">{item.weight} g</span>
+          <button onClick={handleAdd} className="add-button">Add</button>
         </div>
       )}
     </div>
