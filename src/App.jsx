@@ -7,9 +7,16 @@ import Menu from './components/Menu';
 import Cart from './components/Cart';
 import PlaceOrderPage from './components/PlaceOrderPage';
 import axios from 'axios';
+import bgImage from './assets/bg.jpg';
 
 
-
+function App() {
+  return (
+    <div className="app" style={{ backgroundImage: `url(${bgImage})` }}>
+      {/* Your app content */}
+    </div>
+  );
+}
 
 const App = () => {
   const [cart, setCart] = useState([]);
