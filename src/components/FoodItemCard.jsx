@@ -16,19 +16,22 @@ const FoodItemCard = ({ item, addItem, updateItemCount }) => {
 
   return (
     <div className={`food-item-card ${isExpanded ? 'expanded' : ''}`} onClick={toggleExpand}>
-      {item.image && (
-        <div className="food-item-image">
-          <img src={item.image} alt={item.name} />
-        </div>
-      )}
-      <div className="food-item-info">
+      <div className="food-item-summary">
+        {item.image && (
+          <div className="food-item-image">
+            <img src={item.image} alt={item.name} />
+          </div>
+        )}
         <h3 className="food-item-title">{item.name}</h3>
         <p className="food-item-price">₹{item.price}</p>
-        {isExpanded && <p className="food-item-description">{item.description}</p>}
       </div>
       {isExpanded && (
-        <div className="food-item-add">
-          <button onClick={handleAdd} className="add-button">Add to Order</button>
+        <div>
+          <p className="food-item-description">{item.description}</p>
+          <div className="food-item-add">
+            <span>{item.weight} g</span>
+            <button onClick={handleAdd} className="add-button">Add</button>
+          </div>
         </div>
       )}
     </div>
