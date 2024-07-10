@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Navbar from './components/NavBar';
 import Menu from './components/Menu';
-import Cart from './components/Cart';
+import CartItem from './components/CartItem';
 import PlaceOrderPage from './components/PlaceOrderPage';
 import axios from 'axios';
 
 const App = () => {
   const [cart, setCart] = useState([]);
-  const [showCart, setShowCart] = useState(false);
+  const [showCartItem, setShowCartItem] = useState(false);
   const [showPlaceOrderPage, setShowPlaceOrderPage] = useState(false);
   const [foodItemCounts, setFoodItemCounts] = useState({});
   const [restaurantName, setRestaurantName] = useState('');
@@ -70,9 +70,13 @@ const App = () => {
 
   const getTotalItems = () => cart.length;
 
-  const handleViewOrderClick = () => setShowPlaceOrderPage(true);
+  const handleViewOrderClick = () => {
+    setShowCartItem(true);
+    setShowPlaceOrderPage(false);
+  };
+
   const handleCartClick = () => {
-    setShowCart(true);
+    setShowCartItem(true);
     setShowPlaceOrderPage(false);
   };
 
@@ -109,11 +113,13 @@ const App = () => {
           <span className="order-count">{getTotalItems()}</span>
         </div>
       )}
-      {showCart && (
-        <Cart
+      {showCartItem && (
+        <CartItem
           cartItems={cart}
-          setShowCart={setShowCart}
-          setShowPlaceOrderPage={setShowPlaceOrderPage}
+          setCart={setCart}
+          removeItem={removeItem}
+          setShowCartItem={setShowCartItem}
+          updateItemCount={updateItemCount}
         />
       )}
       {showPlaceOrderPage && (
