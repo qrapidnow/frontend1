@@ -3,10 +3,18 @@
 .body {
   margin: 0;
   font-family: 'Kameron', serif;  /* Main body font */
-  background-color: #000;        /* Changed background to black */
-  color: #fff;                   /* Text color set to white */
+  background-color: #000;         /* Changed background to black */
+  color: #fff;                    /* Text color set to white */
 }
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Kameron', serif; /* Main body font */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff; /* Text color set to white */
 }
